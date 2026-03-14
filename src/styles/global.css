@@ -1,0 +1,284 @@
+/* ─── CYBERSHIELD AI — GLOBAL STYLES ──────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+
+/* ── CSS Variables ── */
+:root {
+  --bg:           #020b14;
+  --bg2:          #041424;
+  --surface:      rgba(0, 255, 136, 0.04);
+  --border:       rgba(0, 255, 136, 0.15);
+  --border-bright:rgba(0, 255, 136, 0.5);
+  --green:        #00ff88;
+  --green2:       #00cc6a;
+  --cyan:         #00e5ff;
+  --red:          #ff2d55;
+  --orange:       #ff9500;
+  --yellow:       #ffd60a;
+  --purple:       #bf5af2;
+  --text:         #e0ffe8;
+  --text-dim:     rgba(224, 255, 232, 0.5);
+  --glow:         0 0 20px rgba(0, 255, 136, 0.3);
+  --glow-red:     0 0 20px rgba(255, 45, 85, 0.4);
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Base ── */
+body, .cs-root {
+  font-family: 'Rajdhani', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.cs-root { position: relative; }
+
+/* ── Matrix Canvas ── */
+.matrix-canvas {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; opacity: 0.04; z-index: 0;
+}
+
+/* ── Layout ── */
+.cs-app {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; min-height: 100vh;
+}
+
+/* ── Header ── */
+.cs-header {
+  background: rgba(2, 11, 20, 0.95);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  display: flex; align-items: center; gap: 24px;
+  height: 64px;
+  backdrop-filter: blur(20px);
+  position: sticky; top: 0; z-index: 100;
+}
+
+.cs-logo {
+  font-family: 'Orbitron', monospace;
+  font-weight: 900; font-size: 20px;
+  color: var(--green);
+  text-shadow: 0 0 20px rgba(0, 255, 136, 0.6);
+  letter-spacing: 2px;
+  white-space: nowrap;
+}
+.cs-logo span { color: var(--cyan); }
+
+.cs-status {
+  display: flex; align-items: center; gap: 8px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px; color: var(--green2);
+}
+
+.cs-pulse {
+  width: 6px; height: 6px;
+  background: var(--green); border-radius: 50%;
+  animation: pulse 1.5s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 6px var(--green); }
+  50%       { opacity: 0.3; box-shadow: none; }
+}
+
+.cs-time {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 12px; color: var(--text-dim);
+  margin-left: auto;
+}
+
+/* ── Navigation Tabs ── */
+.cs-tabs {
+  display: flex; gap: 2px; padding: 12px 24px;
+  background: rgba(4, 20, 36, 0.8);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+}
+
+.cs-tab {
+  padding: 8px 18px; border: 1px solid var(--border);
+  background: transparent; color: var(--text-dim);
+  font-family: 'Rajdhani', sans-serif; font-size: 13px; font-weight: 600;
+  letter-spacing: 1px; text-transform: uppercase; cursor: pointer;
+  transition: all 0.2s; border-radius: 2px; white-space: nowrap;
+}
+.cs-tab:hover { border-color: var(--green2); color: var(--green2); }
+.cs-tab.active {
+  background: rgba(0, 255, 136, 0.1); border-color: var(--green);
+  color: var(--green); box-shadow: var(--glow);
+}
+
+/* ── Content Area ── */
+.cs-content { padding: 24px; flex: 1; }
+
+/* ── Cards ── */
+.cs-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 4px; padding: 20px;
+  position: relative; overflow: hidden;
+}
+.cs-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--green), transparent);
+  opacity: 0.6;
+}
+
+.cs-card-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--green2); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 8px;
+}
+.cs-card-title::before { content: '▶'; font-size: 8px; color: var(--green); }
+
+/* ── Grid Layouts ── */
+.cs-grid   { display: grid; gap: 20px; }
+.cs-grid-2 { grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); }
+.cs-grid-3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+
+/* ── Inputs ── */
+.cs-input {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4); border: 1px solid var(--border);
+  color: var(--text); font-family: 'Share Tech Mono', monospace; font-size: 13px;
+  padding: 10px 14px; border-radius: 2px; outline: none;
+  transition: border-color 0.2s;
+}
+.cs-input:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 1px rgba(0, 255, 136, 0.2);
+}
+.cs-input::placeholder { color: var(--text-dim); }
+textarea.cs-input { resize: vertical; min-height: 80px; }
+
+/* ── Buttons ── */
+.cs-btn {
+  padding: 10px 24px;
+  background: rgba(0, 255, 136, 0.1); border: 1px solid var(--green);
+  color: var(--green); font-family: 'Rajdhani', sans-serif;
+  font-weight: 700; font-size: 13px;
+  letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
+  border-radius: 2px; transition: all 0.2s;
+}
+.cs-btn:hover { background: rgba(0, 255, 136, 0.2); box-shadow: var(--glow); }
+
+.cs-btn-red { border-color: var(--red); color: var(--red); background: rgba(255, 45, 85, 0.1); }
+.cs-btn-red:hover { background: rgba(255, 45, 85, 0.2); box-shadow: var(--glow-red); }
+
+.cs-btn-sm { padding: 6px 14px; font-size: 11px; }
+
+/* ── Risk / Severity Badges ── */
+.cs-badge {
+  display: inline-block; padding: 2px 8px; border-radius: 2px;
+  font-family: 'Share Tech Mono', monospace; font-size: 10px; font-weight: bold;
+  letter-spacing: 1px;
+}
+.badge-CRITICAL { background: rgba(255,45,85,0.2);   color: var(--red);    border: 1px solid rgba(255,45,85,0.4); }
+.badge-HIGH     { background: rgba(255,149,0,0.2);   color: var(--orange); border: 1px solid rgba(255,149,0,0.4); }
+.badge-MEDIUM   { background: rgba(255,214,10,0.2);  color: var(--yellow); border: 1px solid rgba(255,214,10,0.4); }
+.badge-LOW      { background: rgba(0,229,255,0.15);  color: var(--cyan);   border: 1px solid rgba(0,229,255,0.3); }
+.badge-SAFE     { background: rgba(0,255,136,0.15);  color: var(--green);  border: 1px solid rgba(0,255,136,0.3); }
+.badge-INFO     { background: rgba(191,90,242,0.2);  color: var(--purple); border: 1px solid rgba(191,90,242,0.4); }
+
+/* ── Shared Components ── */
+.score-ring {
+  position: relative;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.score-val {
+  position: absolute;
+  font-family: 'Orbitron', monospace; font-weight: 900; text-align: center;
+}
+
+.mono    { font-family: 'Share Tech Mono', monospace; font-size: 12px; color: var(--cyan); word-break: break-all; }
+.mono-sm { font-family: 'Share Tech Mono', monospace; font-size: 11px; color: var(--text-dim); word-break: break-all; }
+
+.risk-item { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.risk-item:last-child { border-bottom: none; }
+
+.pw-bar-wrap { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; margin: 8px 0; }
+.pw-bar { height: 100%; border-radius: 3px; transition: width 0.4s, background 0.4s; }
+
+.hash-out {
+  background: rgba(0,0,0,0.5); border: 1px solid var(--border); border-radius: 2px;
+  padding: 12px; font-family: 'Share Tech Mono', monospace; font-size: 11px;
+  color: var(--cyan); word-break: break-all; margin-top: 8px; position: relative;
+}
+
+.stat-block { text-align: center; padding: 12px; border: 1px solid var(--border); border-radius: 4px; }
+.stat-val   { font-family: 'Orbitron', monospace; font-size: 24px; font-weight: 700; }
+.stat-label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+
+/* ── Alert Feed ── */
+.alert-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 12px; border-radius: 2px; margin-bottom: 6px;
+  animation: slideIn 0.3s ease;
+}
+@keyframes slideIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: none; } }
+.alert-critical { background: rgba(255,45,85,0.1);  border-left: 3px solid var(--red); }
+.alert-warning  { background: rgba(255,149,0,0.08); border-left: 3px solid var(--orange); }
+.alert-info     { background: rgba(0,229,255,0.06); border-left: 3px solid var(--cyan); }
+
+/* ── Dashboard Metrics ── */
+.dash-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px; margin-bottom: 24px;
+}
+
+/* ── Hex Dump ── */
+.hex-dump      { font-family: 'Share Tech Mono', monospace; font-size: 11px; line-height: 1.8; color: var(--green2); }
+.hex-offset    { color: var(--text-dim); margin-right: 12px; }
+.hex-ascii     { color: var(--cyan); margin-left: 12px; }
+
+/* ── Copy Button ── */
+.copy-btn {
+  position: absolute; top: 8px; right: 8px;
+  background: rgba(0,255,136,0.1); border: 1px solid var(--border);
+  color: var(--text-dim); font-size: 10px; padding: 3px 8px;
+  cursor: pointer; border-radius: 2px;
+}
+.copy-btn:hover { color: var(--green); border-color: var(--green); }
+
+/* ── Toggle Row ── */
+.toggle-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0; }
+
+/* ── Utility Spacing ── */
+.gap-sm { margin-top: 12px; }
+.gap-md { margin-top: 20px; }
+
+/* ── Labels ── */
+.cs-label {
+  font-size: 12px; color: var(--text-dim);
+  text-transform: uppercase; letter-spacing: 1px;
+  margin-bottom: 6px; display: block;
+}
+
+/* ── Animations ── */
+.scanning { animation: scanGlow 1s ease-in-out infinite; }
+@keyframes scanGlow { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+
+.blink { animation: blink 1s step-end infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ── Chart Tooltip Override ── */
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: var(--bg2) !important;
+  border: 1px solid var(--border) !important;
+  font-family: 'Share Tech Mono', monospace !important;
+  font-size: 11px !important;
+}
+
+/* ── Custom Scrollbar ── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--green2); }
