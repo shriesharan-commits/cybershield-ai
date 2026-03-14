@@ -9,7 +9,7 @@ export default defineConfig({
       // Any request to /api/* gets forwarded to the Express backend on port 5000
       // This means the browser never needs to know about port 5000
       "/api": {
-        target: "http://localhost:5000",
+        target: "https://cybershield-api-ez0a.onrender.com",
         changeOrigin: true,
       },
     },
