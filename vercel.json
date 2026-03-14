@@ -1,7 +1,7 @@
 {
-  "buildCommand": "vite build",
+  "buildCommand": "npx vite build",
   "outputDirectory": "dist",
-  "framework": "vite",
+  "installCommand": "npm install --ignore-scripts",
   "rewrites": [
     {
       "source": "/api/(.*)",
